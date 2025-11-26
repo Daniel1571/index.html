@@ -1,17 +1,27 @@
-document.getElementById("loginForm").addEventListener("submit", function (e) {
-  e.preventDefault();
+// Seleccionamos el formulario por su id
+const encuestaForm = document.getElementById('encuestaForm');
 
-  const correo = document.getElementById("correoLogin").value.trim();
-  const regexCBTIS = /^[0-9]{14}@cbtis122\.edu\.mx$/;
+// Agregamos el listener para cuando se envíe el formulario
+encuestaForm.addEventListener('submit', function(event) {
+  event.preventDefault();  // Esto evita que la página se recargue
 
-  if (!regexCBTIS.test(correo)) {
-    alert("Debes ingresar tu correo institucional del CBTIS 122, ejemplo: 23308051220722@cbtis122.edu.mx");
-    return;
+  // Ahora capturamos los valores de los campos
+  const sentimiento = document.getElementById('sentimiento').value.trim();
+  const ambiente = document.getElementById('ambiente').value.trim();
+  const situaciones = document.getElementById('situaciones').value.trim();
+  const mejoras = document.getElementById('mejoras').value.trim();
+
+  // Validamos que los campos requeridos no estén vacíos
+  if (!sentimiento || !ambiente || !mejoras) {
+    alert('Por favor, llena todos los campos requeridos.');
+    return; // Salimos para que el formulario no se envíe si falta info
   }
 
-  document.getElementById("loginSection").style.display = "none";
-  document.getElementById("sugerenciasSection").style.display = "block";
-  document.getElementById("encuestaSection").style.display = "block";
-  document.getElementById("mejoraSection").style.display = "block";
-  document.getElementById("carteleraSection").style.display = "block";
+  // Aquí iría el código para enviar esos datos a donde quieras (Firebase, servidor, etc.)
+
+  // Ejemplo: solo mostrar alerta de éxito
+  alert('¡Encuesta enviada con éxito! Gracias por tu participación.');
+
+  // Limpiamos el formulario para que se pueda usar otra vez
+  encuestaForm.reset();
 });
