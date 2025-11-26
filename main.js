@@ -18,18 +18,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const correo = document.getElementById('correoLogin').value.trim();
 
-    // Validar correo básico (puedes mejorarlo con regex)
-    if (!correo || !correo.includes('@')) {
-      alert('Por favor, ingresa un correo institucional válido.');
+    // Validación: solo números antes de @cbtis122.edu.mx
+    const correoPermitido = /^[0-9]+@cbtis122\.edu\.mx$/;
+
+    if (!correoPermitido.test(correo)) {
+      alert('Correo inválido. Solo se permiten correos institucionales válidos con números.');
       return;
     }
-
-    // Aquí puedes agregar validaciones específicas del dominio del correo institucional
-    // Ejemplo:
-    // if (!correo.endsWith('@tudominio.edu.mx')) {
-    //   alert('Por favor usa tu correo institucional.');
-    //   return;
-    // }
 
     // Login exitoso: ocultar login y mostrar otras secciones
     loginSection.style.display = 'none';
@@ -40,7 +35,6 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // Prevenir recarga y manejar envíos de formularios restantes
-
   sugerenciasForm.addEventListener('submit', (e) => {
     e.preventDefault();
     const mensaje = document.getElementById('mensaje').value.trim();
